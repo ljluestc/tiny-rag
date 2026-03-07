@@ -269,7 +269,7 @@ tiny-rag 实现了双路召回：bm25召回和向量召回，实现重排模型�
 召回模块是实现了双路召回：
 
 - bm25召回：`tinyrag/searcher/bm25_recall`
-- 向量召回：`tinyrag/searcher/bm25_recall`
+- 向量召回：`tinyrag/searcher/emb_recall`
 
 
 #### （2）重排模型
