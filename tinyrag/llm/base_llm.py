@@ -13,4 +13,4 @@ class BaseLLM(ABC):
 
     @abstractmethod
     def generate(self, content: str) -> str:
-        raise NotImplemented
+        raise NotImplementedError

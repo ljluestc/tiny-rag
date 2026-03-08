@@ -26,6 +26,18 @@ RAG_PROMPT_TEMPALTE="""参考信息：
 请根据上述参考信息回答和我的问题或指令，修正我的回答。前面的参考信息和我的回答可能有用，也可能没用，你需要从我给出的参考信息中选出与我的问题最相关的那些，来为你修正的回答提供依据。回答一定要忠于原文，简洁但不丢信息，不要胡乱编造。我的问题或指令是什么语种，你就用什么语种回复。
 你修正的回答:"""
 
+RAG_PROMPT_TEMPLATE_EN="""Reference information:
+{context}
+---
+Question:
+{question}
+---
+Initial answer:
+{answer}
+---
+Based on the reference information above, refine the initial answer. Select the most relevant parts from the reference to support your refined answer. Be faithful to the source material, concise but complete, and do not fabricate information.
+Refined answer:"""
+
 @dataclass
 class RAGConfig:
     base_dir:str = "data/wiki_db"
@@ -64,7 +76,7 @@ class TinyRAG:
                 device=self.config.device
             )
         else:
-            raise "failed init LLM, the model type is [qwen2, tinyllm]"
+            raise ValueError("failed init LLM, the model type must be one of [qwen2, tinyllm]")
 
     def build(self, docs: List[str]):
         """ 注意： 构建数据库需要很长时间
@@ -89,7 +101,7 @@ class TinyRAG:
 
         jsonl_list = [{"text": item} for item in txt_list]
         write_list_to_jsonl(jsonl_list, self.config.base_dir + "/split_sentence.jsonl")
-        logger.info("split sentence success, all sentence number: ", len(txt_list))
+        logger.info("split sentence success, all sentence number: {}".format(len(txt_list)))
         logger.info("build database ...... ")
         self.searcher.build_db(txt_list)
         logger.info("build database success, starting save .... ")

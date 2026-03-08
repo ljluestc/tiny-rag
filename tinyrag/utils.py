@@ -81,16 +81,6 @@ def read_txt_to_list(file_path):
         data = [line.strip() for line in f]
     return data
 
-def write_list_to_txt(data_list, file_path):
-    """
-    将数据列表每一项作为一行文本保存到文件中。
-    
-    :param data_list: 要保存的数据列表，每个元素为字符串。
-    :param file_path: 输出文件的路径。
-    """
-    with open(file_path, 'w', encoding='utf-8') as writer:
-        for line in data_list:
-            writer.write(line + '\n')
 
 
 def read_file(input_path):
@@ -107,6 +97,8 @@ def read_file(input_path):
          raw_list = read_json_to_list(input_path)
     elif ".txt" == file_extension :
         raw_list = read_txt_to_list(input_path)
+    else:
+        raise ValueError(f"Unsupported file extension: {file_extension}")
     print(f'{input_path} 已处理完成...')
     return raw_list
 
