@@ -303,7 +303,46 @@ def search(self, query:str, top_n=3) -> list:
     return rerank_result
 ```
 
-## 5.参考
+## 5. Interview Q&A RAG (English)
+
+This project includes a **DevOps Interview Q&A RAG** module that indexes 50 production-quality interview questions and answers covering DevOps, CI/CD, Jenkins, Docker, Kubernetes, Terraform, Linux, Git, Networking, AWS, Monitoring, Security, Ansible, Python, and Shell.
+
+### 5.1 Dataset
+
+The interview dataset is at `data/interview_questions/devops_interview_en.json`. Each record has:
+
+```json
+{
+    "id": "devops_001",
+    "section": "DevOps",
+    "question": "What is DevOps?",
+    "completion": "DevOps is a set of cultural philosophies, practices, and tools..."
+}
+```
+
+### 5.2 Build the Interview Database
+
+```bash
+python script/interview_rag.py -t build -c config/interview_config.json
+```
+
+### 5.3 Interactive Search
+
+```bash
+python script/interview_rag.py -t search -c config/interview_config.json
+```
+
+### 5.4 Single Query
+
+```bash
+python script/interview_rag.py -t query -c config/interview_config.json -q "What is Kubernetes?"
+```
+
+### 5.5 Add Your Own Questions
+
+Append new Q&A entries to `data/interview_questions/devops_interview_en.json` following the same schema, then rebuild the database.
+
+## 6.参考
 
 | Name                                                         | Paper Link                                |
 | ------------------------------------------------------------ | ----------------------------------------- |

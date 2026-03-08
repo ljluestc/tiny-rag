@@ -1,0 +1,302 @@
+[
+  {
+    "id": "devops_001",
+    "section": "DevOps",
+    "question": "What is DevOps?",
+    "completion": "DevOps is a set of cultural philosophies, practices, and tools that combines software development (Dev) and IT operations (Ops). Its goal is to shorten the systems development lifecycle and deliver high-quality software continuously. DevOps emphasizes collaboration between development and operations teams, automation of repetitive tasks, continuous integration and delivery, infrastructure as code, monitoring and logging, and rapid feedback loops. It helps organizations deploy more frequently, reduce failure rates, shorten lead time between fixes, and improve mean time to recovery."
+  },
+  {
+    "id": "devops_002",
+    "section": "DevOps",
+    "question": "What are the anti-patterns of DevOps?",
+    "completion": "DevOps anti-patterns are practices that appear to adopt DevOps but actually undermine its goals. Common anti-patterns include: creating a separate DevOps team that becomes another silo; adopting tools like Jenkins or Docker without changing organizational culture; manual configuration of production servers leading to configuration drift; infrequent large releases instead of small incremental deployments; lacking automated testing while pushing automated deployments; focusing only on speed while ignoring monitoring, rollback, and stability; and relying on hero individuals for firefighting instead of building platform capabilities."
+  },
+  {
+    "id": "devops_003",
+    "section": "DevOps",
+    "question": "What is Continuous Integration?",
+    "completion": "Continuous Integration (CI) is a development practice where developers frequently merge their code changes into a shared repository, ideally multiple times per day. Each integration is automatically verified by building the application and running automated tests to detect integration errors as quickly as possible. A proper CI pipeline typically includes: pulling source code, installing dependencies, compiling, static analysis, unit tests, integration tests, and reporting results. The key benefit is establishing a fast feedback loop so problems are caught in minutes rather than at release time."
+  },
+  {
+    "id": "devops_004",
+    "section": "DevOps",
+    "question": "What is Continuous Deployment vs Continuous Delivery?",
+    "completion": "Continuous Delivery (CD) means the codebase is always in a deployable state — code passes through automated build, test, scan, and environment verification stages so it can be safely released to production at any time, but the final deployment step typically requires manual approval. Continuous Deployment goes one step further: every change that passes all automated pipeline stages is automatically deployed to production without human intervention. Many enterprises choose Continuous Delivery over Continuous Deployment due to compliance, approval workflows, or business timing requirements. Both require mature testing, release strategies, and rollback mechanisms."
+  },
+  {
+    "id": "devops_005",
+    "section": "DevOps",
+    "question": "What CI/CD best practices are you familiar with?",
+    "completion": "CI/CD best practices include: commit small changes frequently and trigger builds automatically on each commit; define pipelines as code (Jenkinsfile, GitHub Actions YAML) stored in version control; build artifacts once and promote them across dev/staging/prod environments; use containers or Infrastructure as Code to ensure environment consistency; set quality gates for security scans, test coverage, and policy checks; support canary and blue-green deployments with automatic rollback; monitor pipeline health metrics like build duration, failure rate, and deployment success rate; and keep build times fast to maintain developer feedback loops."
+  },
+  {
+    "id": "devops_006",
+    "section": "DevOps",
+    "question": "Explain mutable vs immutable infrastructure",
+    "completion": "Mutable infrastructure means changes are applied on top of existing servers through patching, configuration updates, and in-place modifications. Tools like Ansible, Puppet, and Chef follow this paradigm. The advantage is flexibility and quick iteration, but it risks configuration drift where servers diverge from their intended state over time. Immutable infrastructure means every change results in new infrastructure — instead of updating a server, you replace it entirely with a new instance built from a fresh image. Terraform and container-based deployments follow this paradigm. Benefits include consistency, easier rollback, and better auditability. Modern cloud-native architectures generally prefer immutable infrastructure using VM images, containers, and Kubernetes rolling updates."
+  },
+  {
+    "id": "devops_007",
+    "section": "DevOps",
+    "question": "What is Infrastructure as Code?",
+    "completion": "Infrastructure as Code (IaC) is the practice of managing and provisioning computing infrastructure through machine-readable definition files rather than manual processes. IaC treats infrastructure configuration like application source code — it is version controlled, reviewed, tested, and can be reproduced consistently. Key benefits include: repeatability (same infrastructure across environments), version control (track changes, rollback), automation (reduce manual errors), documentation (code serves as living documentation), and scalability. Popular IaC tools include Terraform (declarative, cloud-agnostic), AWS CloudFormation, Pulumi, and Ansible. Terraform uses HCL to define desired state, and its plan/apply workflow shows changes before execution."
+  },
+  {
+    "id": "devops_008",
+    "section": "DevOps",
+    "question": "What is configuration drift and how do you deal with it?",
+    "completion": "Configuration drift occurs when the actual configuration of infrastructure diverges from its intended or documented state over time, typically due to manual changes, ad-hoc fixes, or inconsistent update processes. It causes problems like unreproducible environments, harder debugging, security vulnerabilities from unpatched systems, and failed deployments. Solutions include: using Infrastructure as Code to define desired state declaratively; implementing configuration management tools (Ansible, Puppet) with regular enforcement runs; adopting immutable infrastructure where servers are replaced rather than modified; using automated compliance scanning to detect drift; maintaining a single source of truth in version control; and establishing change management processes that prevent unauthorized manual changes."
+  },
+  {
+    "id": "devops_009",
+    "section": "Jenkins",
+    "question": "What is Jenkins and what do you use it for?",
+    "completion": "Jenkins is an open-source automation server used primarily for implementing CI/CD pipelines. It automates building, testing, and deploying software. Jenkins integrates with version control systems like Git and triggers build pipelines when code changes occur. Key concepts include: Jobs (task configurations), Builds (single execution of a job), Plugins (extend functionality — over 1800 available), Agents (remote machines that execute jobs), and Executors (worker slots on agents). Jenkins supports Pipeline as Code through Jenkinsfiles, which define build stages declaratively in Groovy. Its master-agent architecture enables distributed builds across multiple machines."
+  },
+  {
+    "id": "devops_010",
+    "section": "Jenkins",
+    "question": "What types of Jenkins jobs exist?",
+    "completion": "Jenkins supports several job types: Freestyle jobs are basic, UI-configured build tasks suitable for simple builds. Pipeline jobs use Jenkinsfiles to define modern CI/CD pipelines as code with stages and steps. Multibranch Pipeline jobs automatically discover and build Git branches, creating pipelines for each branch. Folder jobs organize multiple related jobs into a hierarchy. Matrix (Multi-configuration) jobs run builds across multiple environments or parameter combinations simultaneously, such as testing across Java 8/11/17 on Linux and Windows. Organization Folder jobs scan an entire GitHub/GitLab organization and create pipelines for every repository matching criteria."
+  },
+  {
+    "id": "devops_011",
+    "section": "Jenkins",
+    "question": "How do you secure Jenkins?",
+    "completion": "Jenkins security best practices include: enable authentication using LDAP, OAuth, or Active Directory integration; implement Role-Based Access Control (RBAC) using the Role Strategy plugin to restrict permissions per user/group; store secrets and credentials in the Jenkins Credentials Store rather than hardcoding them in pipelines; enable HTTPS/TLS encryption for the Jenkins web interface; disable anonymous access to prevent unauthorized usage; restrict agent node permissions and limit which jobs can run on which agents; regularly update Jenkins core and plugins to patch security vulnerabilities; use the Script Security plugin to sandbox Groovy scripts; audit pipeline code through code review before merging Jenkinsfiles; and enable CSRF protection."
+  },
+  {
+    "id": "devops_012",
+    "section": "Docker",
+    "question": "What is Docker and how does it work?",
+    "completion": "Docker is a platform for building, shipping, and running applications in containers. Containers are lightweight, isolated environments that package application code with all its dependencies, libraries, and runtime. Unlike virtual machines, containers share the host OS kernel, making them much more efficient in terms of resource usage and startup time. Key Docker concepts: Images are read-only templates built from Dockerfiles using layers; Containers are running instances of images; Registries (Docker Hub, ECR) store and distribute images; Volumes provide persistent storage; Networks enable container-to-container communication. Docker uses Linux namespaces for isolation, cgroups for resource limits, and union file systems for layered storage."
+  },
+  {
+    "id": "devops_013",
+    "section": "Docker",
+    "question": "What is the difference between CMD and ENTRYPOINT in a Dockerfile?",
+    "completion": "Both CMD and ENTRYPOINT define what command runs when a container starts, but they behave differently. ENTRYPOINT sets the main executable that always runs — it cannot be easily overridden by command-line arguments (unless --entrypoint flag is used). CMD provides default arguments that can be overridden when running the container. When both are specified, CMD provides default arguments to ENTRYPOINT. For example: ENTRYPOINT [\"python\"] with CMD [\"app.py\"] means running the container executes 'python app.py', but you can override with 'docker run myimage script.py' to run 'python script.py' instead. Best practice: use ENTRYPOINT for the main process and CMD for default arguments."
+  },
+  {
+    "id": "devops_014",
+    "section": "Docker",
+    "question": "How do you reduce Docker image size?",
+    "completion": "Strategies to reduce Docker image size: use minimal base images like Alpine Linux (5MB) or distroless images instead of full Ubuntu/Debian; use multi-stage builds to separate build dependencies from the final runtime image; combine RUN commands to reduce layers; clean up package manager caches in the same RUN instruction (e.g., apt-get clean && rm -rf /var/lib/apt/lists/*); use .dockerignore to exclude unnecessary files from the build context; avoid installing unnecessary packages; pin specific package versions to avoid pulling extras; copy only needed files rather than the entire project directory; and use tools like docker-slim or dive to analyze and optimize image layers."
+  },
+  {
+    "id": "devops_015",
+    "section": "Docker",
+    "question": "Explain Docker networking modes",
+    "completion": "Docker provides several networking modes: Bridge (default) creates a private internal network on the host where containers get their own IP and communicate through the bridge; Host removes network isolation — containers share the host network stack directly, useful for performance-sensitive applications; None disables all networking for fully isolated containers; Overlay enables multi-host networking across Docker Swarm nodes by creating a distributed network; Macvlan assigns a MAC address to each container, making it appear as a physical device on the network. For container-to-container communication, Docker also provides built-in DNS resolution by container name within user-defined networks. In production, overlay networks are commonly used with orchestrators like Kubernetes or Swarm."
+  },
+  {
+    "id": "devops_016",
+    "section": "Kubernetes",
+    "question": "What is Kubernetes and why do we need it?",
+    "completion": "Kubernetes (K8s) is an open-source container orchestration platform that automates deploying, scaling, and managing containerized applications. It is needed because running containers in production requires: automated scaling (scale pods up/down based on load), self-healing (restart failed containers, replace unhealthy nodes), service discovery and load balancing, rolling updates with zero downtime, secrets and configuration management, storage orchestration, and resource management across a cluster. Key components include: Pods (smallest deployable unit), Deployments (manage pod replicas), Services (stable networking endpoints), ConfigMaps/Secrets (configuration), Namespaces (resource isolation), and Ingress (external traffic routing). The control plane consists of the API Server, etcd, Scheduler, and Controller Manager."
+  },
+  {
+    "id": "devops_017",
+    "section": "Kubernetes",
+    "question": "Explain the difference between a Deployment, StatefulSet, and DaemonSet",
+    "completion": "Deployment manages stateless application replicas with rolling updates and rollbacks. Pods are interchangeable and can be rescheduled to any node. Use for web servers, API services, and microservices. StatefulSet manages stateful applications that need stable persistent identifiers, ordered deployment/scaling, and persistent storage. Each pod gets a unique ordinal index (pod-0, pod-1) and stable network identity. Use for databases like MySQL, MongoDB, Kafka, and Zookeeper. DaemonSet ensures a copy of a pod runs on every node (or selected nodes) in the cluster. When new nodes join, the DaemonSet automatically deploys pods to them. Use for node-level services like log collectors (Fluentd), monitoring agents (Prometheus node-exporter), and network plugins."
+  },
+  {
+    "id": "devops_018",
+    "section": "Kubernetes",
+    "question": "What is a Kubernetes Service and what types exist?",
+    "completion": "A Kubernetes Service is an abstraction that provides a stable endpoint for accessing a set of pods, decoupling clients from pod lifecycle changes. Types include: ClusterIP (default) exposes the service on a cluster-internal IP, accessible only within the cluster; NodePort exposes the service on a static port on each node IP, accessible externally via NodeIP:NodePort; LoadBalancer provisions an external cloud load balancer that routes traffic to the service; ExternalName maps the service to a DNS name without proxying, useful for external services. Services use label selectors to identify target pods and kube-proxy handles traffic routing. For HTTP/HTTPS routing, Ingress resources provide path-based and host-based routing with TLS termination."
+  },
+  {
+    "id": "devops_019",
+    "section": "Terraform",
+    "question": "What is Terraform and how does it work?",
+    "completion": "Terraform is an open-source Infrastructure as Code tool by HashiCorp that lets you define cloud and on-premises resources in declarative configuration files using HashiCorp Configuration Language (HCL). Its workflow has three stages: Write (define resources in .tf files), Plan (preview changes Terraform will make), and Apply (execute the changes). Terraform maintains a state file that maps your configuration to real-world resources, enabling it to determine what needs to be created, modified, or destroyed. Key features include: provider plugins for AWS/GCP/Azure and hundreds of other services, modules for reusable infrastructure components, workspaces for managing multiple environments, and remote state backends (S3, Terraform Cloud) for team collaboration."
+  },
+  {
+    "id": "devops_020",
+    "section": "Terraform",
+    "question": "What is Terraform state and why is it important?",
+    "completion": "Terraform state is a JSON file (terraform.tfstate) that records the mapping between your configuration and the real-world infrastructure resources. It is critical because: Terraform uses it to determine what changes need to be applied (plan); it tracks resource metadata and dependencies; it stores sensitive information like database passwords. Best practices for state management: use remote backends (S3 + DynamoDB for locking, Terraform Cloud) instead of local state for team collaboration; enable state locking to prevent concurrent modifications; encrypt state at rest since it may contain secrets; never manually edit the state file; use terraform import to bring existing resources under management; and use workspaces or separate state files per environment (dev/staging/prod)."
+  },
+  {
+    "id": "devops_021",
+    "section": "Terraform",
+    "question": "Explain Terraform modules and when to use them",
+    "completion": "Terraform modules are reusable, self-contained packages of Terraform configuration that encapsulate a set of resources. A module is simply a directory containing .tf files with input variables, resource definitions, and outputs. Use modules when: you have infrastructure patterns repeated across projects or environments; you want to enforce organizational standards (e.g., standard VPC layout); you need to abstract complex resource configurations behind a simple interface. Modules can be sourced from local paths, Git repositories, or the Terraform Registry. Best practices: keep modules focused on a single concern, use semantic versioning, define clear input variables with descriptions and validation, expose useful outputs, and document usage examples. The root module is your main working directory."
+  },
+  {
+    "id": "devops_022",
+    "section": "Linux",
+    "question": "Explain Linux file permissions and how to change them",
+    "completion": "Linux file permissions control read (r=4), write (w=2), and execute (x=1) access for three categories: owner (user), group, and others. Permissions are displayed as rwxrwxrwx (e.g., -rwxr-xr-- means owner has full access, group can read/execute, others can only read). Change permissions with chmod: numeric mode (chmod 755 file sets rwxr-xr-x) or symbolic mode (chmod u+x file adds execute for owner). Change ownership with chown (chown user:group file). Special permissions include: SUID (4000, execute as file owner), SGID (2000, inherit group on directories), and sticky bit (1000, only owner can delete in shared directories like /tmp). Use ls -la to view permissions and umask to set default permissions for new files."
+  },
+  {
+    "id": "devops_023",
+    "section": "Linux",
+    "question": "What is the difference between a process and a thread?",
+    "completion": "A process is an independent program in execution with its own memory space, file descriptors, and system resources. Processes are isolated from each other — one process crashing does not affect others. A thread is a lightweight unit of execution within a process that shares the process memory space, file descriptors, and other resources. Multiple threads in the same process can communicate through shared memory directly, while processes must use inter-process communication (IPC) mechanisms like pipes, sockets, or shared memory segments. Threads are faster to create and context-switch than processes due to shared resources. In Linux, threads are implemented as lightweight processes (clone system call). Use processes for isolation and stability; use threads for performance in CPU-bound or I/O-bound parallel tasks."
+  },
+  {
+    "id": "devops_024",
+    "section": "Linux",
+    "question": "How do you troubleshoot a Linux server that is running slow?",
+    "completion": "Systematic approach to troubleshooting a slow Linux server: 1) Check system load with uptime and top/htop to see CPU, memory, and load averages. 2) Identify CPU-heavy processes with top or ps aux --sort=-%cpu. 3) Check memory usage with free -h and look for swap usage indicating memory pressure. 4) Examine disk I/O with iostat and iotop to find I/O bottlenecks. 5) Check disk space with df -h (full disks cause issues). 6) Review network with netstat/ss for connection counts and iftop for bandwidth. 7) Check dmesg and /var/log/syslog for kernel errors or OOM kills. 8) Use vmstat to see overall system activity including context switches and interrupts. 9) Check if any runaway cron jobs or zombie processes exist. 10) Use strace or perf to profile specific slow processes."
+  },
+  {
+    "id": "devops_025",
+    "section": "Linux",
+    "question": "What is SELinux?",
+    "completion": "SELinux (Security-Enhanced Linux) is a mandatory access control (MAC) security mechanism built into the Linux kernel. Unlike traditional discretionary access control (DAC) where file owners set permissions, SELinux enforces security policies defined by the system administrator that cannot be overridden by users. SELinux operates in three modes: Enforcing (policies are enforced and violations are denied and logged), Permissive (violations are logged but not denied, useful for debugging), and Disabled. SELinux assigns security contexts (labels) to processes, files, and ports, and policies define which contexts can access which resources. Common commands: getenforce (check mode), setenforce 0/1 (toggle permissive/enforcing), ls -Z (view file contexts), and audit2allow (generate policy from denials). SELinux is particularly important for containing compromised services."
+  },
+  {
+    "id": "devops_026",
+    "section": "Git",
+    "question": "Explain git rebase vs git merge",
+    "completion": "Both git merge and git rebase integrate changes from one branch into another, but they do it differently. Git merge creates a new merge commit that combines two branches, preserving the complete history of both branches with all their individual commits. The result is a non-linear history with merge commits. Git rebase replays your branch commits on top of another branch, creating a linear history as if you had written your changes on top of the latest main branch. Rebase rewrites commit history (new commit hashes), so you should never rebase commits that have been pushed to a shared repository. Use merge for shared branches and feature branch integration in team environments; use rebase for cleaning up local feature branch history before merging, or for keeping a clean linear history. Interactive rebase (git rebase -i) lets you squash, reorder, or edit commits."
+  },
+  {
+    "id": "devops_027",
+    "section": "Git",
+    "question": "How do you resolve a git merge conflict?",
+    "completion": "When Git cannot automatically merge changes because both branches modified the same lines, a merge conflict occurs. Resolution steps: 1) Run git status to see which files have conflicts. 2) Open conflicted files — Git marks conflicts with <<<<<<< HEAD (your changes), ======= (separator), and >>>>>>> branch-name (incoming changes). 3) Edit the file to choose the correct content (keep one side, both, or write new code). 4) Remove the conflict markers. 5) Stage resolved files with git add. 6) Complete the merge with git commit. Tools: use git mergetool to launch a visual merge tool (vimdiff, meld, VS Code). Prevention strategies: pull frequently, keep branches small and short-lived, communicate with team about overlapping work areas, and use clear code ownership boundaries."
+  },
+  {
+    "id": "devops_028",
+    "section": "Git",
+    "question": "What is git cherry-pick and when do you use it?",
+    "completion": "Git cherry-pick applies the changes from a specific commit onto your current branch, creating a new commit with the same changes but a different hash. Usage: git cherry-pick <commit-hash>. Common use cases: backporting a bug fix from the main branch to a release branch without merging all changes; applying a specific feature commit to another branch; recovering a useful commit from a branch that was otherwise abandoned. You can cherry-pick multiple commits: git cherry-pick A B C. Use --no-commit flag to apply changes without committing (useful for combining multiple cherry-picks into one commit). Caution: cherry-picking creates duplicate commits across branches, which can cause confusion during later merges. Prefer merge or rebase when incorporating entire branches."
+  },
+  {
+    "id": "devops_029",
+    "section": "Networking",
+    "question": "Explain the difference between TCP and UDP",
+    "completion": "TCP (Transmission Control Protocol) is a connection-oriented protocol that provides reliable, ordered delivery of data. It establishes a connection via a three-way handshake (SYN, SYN-ACK, ACK), guarantees packet delivery through acknowledgments and retransmissions, maintains packet ordering, and provides flow and congestion control. TCP is used for HTTP/HTTPS, SSH, FTP, email, and database connections. UDP (User Datagram Protocol) is a connectionless protocol that sends datagrams without establishing a connection. It provides no delivery guarantees, no ordering, and no congestion control, making it faster with lower latency and overhead. UDP is used for DNS queries, video streaming, VoIP, gaming, and real-time applications where speed matters more than reliability. The choice depends on whether your application prioritizes reliability (TCP) or speed (UDP)."
+  },
+  {
+    "id": "devops_030",
+    "section": "Networking",
+    "question": "What happens when you type a URL in the browser?",
+    "completion": "When you type a URL and press Enter: 1) Browser checks its cache, then OS cache for the DNS record. 2) If not cached, a DNS resolution chain occurs: local DNS resolver, root nameserver, TLD nameserver, authoritative nameserver to get the IP address. 3) Browser establishes a TCP connection to the server via three-way handshake (SYN, SYN-ACK, ACK). 4) If HTTPS, a TLS handshake occurs to establish encrypted communication (certificate verification, key exchange). 5) Browser sends an HTTP request (GET / HTTP/1.1 with headers). 6) Server processes the request, possibly querying databases, and returns an HTTP response with status code, headers, and body (HTML). 7) Browser parses HTML, requests additional resources (CSS, JS, images) in parallel. 8) Browser constructs the DOM, applies CSS (CSSOM), executes JavaScript, and renders the page."
+  },
+  {
+    "id": "devops_031",
+    "section": "Networking",
+    "question": "What is DNS and how does it work?",
+    "completion": "DNS (Domain Name System) translates human-readable domain names (example.com) into IP addresses (93.184.216.34). The resolution process follows a hierarchical structure: 1) Client queries the recursive resolver (usually provided by ISP or services like 8.8.8.8). 2) Resolver checks its cache; if not found, queries root nameservers (13 root server clusters worldwide). 3) Root server directs to the TLD nameserver (.com, .org, etc.). 4) TLD nameserver directs to the authoritative nameserver for the domain. 5) Authoritative nameserver returns the IP address. Record types include: A (IPv4 address), AAAA (IPv6), CNAME (alias), MX (mail server), NS (nameserver), TXT (text data, used for SPF/DKIM), and SOA (zone authority). DNS uses UDP port 53 for queries and TCP for zone transfers. Caching at each level (browser, OS, resolver) improves performance, controlled by TTL values."
+  },
+  {
+    "id": "devops_032",
+    "section": "Networking",
+    "question": "Explain the OSI model layers",
+    "completion": "The OSI (Open Systems Interconnection) model has 7 layers: Layer 1 Physical handles raw bit transmission over physical media (cables, radio waves). Layer 2 Data Link provides node-to-node data transfer with MAC addressing and error detection (Ethernet, switches). Layer 3 Network handles routing and IP addressing for packet delivery across networks (routers, IP). Layer 4 Transport provides end-to-end communication with TCP (reliable) and UDP (fast). Layer 5 Session manages connections and sessions between applications. Layer 6 Presentation handles data format translation, encryption, and compression. Layer 7 Application provides network services directly to user applications (HTTP, DNS, SMTP). In practice, the TCP/IP model simplifies this to 4 layers: Network Access, Internet, Transport, and Application. Understanding the OSI model helps in troubleshooting — identify which layer a problem occurs at to narrow down the cause."
+  },
+  {
+    "id": "devops_033",
+    "section": "AWS",
+    "question": "What is the difference between EC2, ECS, and EKS?",
+    "completion": "EC2 (Elastic Compute Cloud) provides virtual servers (instances) where you manage the full OS, middleware, and application. You have full control but also full operational responsibility. ECS (Elastic Container Service) is AWS's proprietary container orchestration service that manages Docker containers. It handles scheduling, scaling, and networking of containers. ECS can run on EC2 instances (you manage the servers) or Fargate (serverless, AWS manages the infrastructure). EKS (Elastic Kubernetes Service) is AWS's managed Kubernetes service. It runs the standard Kubernetes control plane (API server, etcd, scheduler) and you manage worker nodes (or use Fargate). Choose EC2 for full server control, ECS for simpler AWS-native container workloads, and EKS when you need Kubernetes compatibility, portability across clouds, or have existing Kubernetes expertise."
+  },
+  {
+    "id": "devops_034",
+    "section": "AWS",
+    "question": "What is S3 and what is it used for?",
+    "completion": "Amazon S3 (Simple Storage Service) is an object storage service offering industry-leading scalability, durability (99.999999999% / 11 nines), availability, security, and performance. Objects (files) are stored in buckets with globally unique names. Each object consists of data, metadata, and a unique key (path). S3 use cases include: static website hosting, data lake storage, backup and disaster recovery, content distribution, application data storage, and log archiving. Storage classes include Standard (frequent access), Intelligent-Tiering (automatic cost optimization), Standard-IA (infrequent access), Glacier (archive), and Glacier Deep Archive (long-term archive). Security features include bucket policies, ACLs, server-side encryption (SSE-S3, SSE-KMS, SSE-C), versioning, MFA delete, and access logging."
+  },
+  {
+    "id": "devops_035",
+    "section": "AWS",
+    "question": "What is IAM in AWS?",
+    "completion": "IAM (Identity and Access Management) is the AWS service for controlling authentication (who can sign in) and authorization (what permissions they have). Key concepts: Users are individual accounts for people or services; Groups are collections of users with shared permissions; Roles are sets of permissions that can be assumed by users, services, or external accounts (cross-account access); Policies are JSON documents defining permissions (Effect, Action, Resource, Condition). IAM follows the principle of least privilege — grant only the minimum permissions needed. Best practices: enable MFA on all accounts, use roles instead of long-term access keys for applications, use IAM Identity Center (SSO) for managing access across accounts, regularly rotate credentials, and use AWS Organizations with Service Control Policies for multi-account governance."
+  },
+  {
+    "id": "devops_036",
+    "section": "Monitoring",
+    "question": "Explain monitoring and why it is important",
+    "completion": "Monitoring is the practice of collecting, analyzing, and alerting on metrics, logs, and traces from infrastructure and applications to ensure system health and performance. It is important because: it enables proactive issue detection before users are impacted; provides data for capacity planning; helps meet SLAs and SLOs; supports post-incident analysis and root cause investigation; and gives visibility into system behavior. The three pillars of observability are: Metrics (numerical measurements like CPU usage, request latency, error rates), Logs (discrete event records with timestamps and context), and Traces (end-to-end request flows across distributed services). Effective monitoring includes: infrastructure metrics (CPU, memory, disk, network), application metrics (request rate, error rate, latency), business metrics (orders, signups), and synthetic monitoring (probing endpoints from external locations)."
+  },
+  {
+    "id": "devops_037",
+    "section": "Monitoring",
+    "question": "What is Prometheus and how does it work?",
+    "completion": "Prometheus is an open-source monitoring and alerting toolkit designed for reliability and scalability. It uses a pull-based model where it scrapes HTTP endpoints (/metrics) at configured intervals to collect time-series data. Architecture components: Prometheus Server (scrapes and stores metrics in its TSDB), Exporters (expose metrics from third-party systems like node_exporter for Linux, mysqld_exporter for MySQL), Pushgateway (for short-lived jobs that cannot be scraped), Alertmanager (handles alert routing, deduplication, and notification to Slack/PagerDuty/email), and Grafana (visualization). Prometheus uses PromQL (Prometheus Query Language) for querying data. Metrics types include Counter (monotonically increasing), Gauge (arbitrary value), Histogram (bucketed distributions), and Summary (quantiles). It follows a dimensional data model with metric names and key-value label pairs."
+  },
+  {
+    "id": "devops_038",
+    "section": "Security",
+    "question": "What is the principle of least privilege?",
+    "completion": "The principle of least privilege (PoLP) states that any user, program, or process should have only the minimum permissions needed to perform its intended function — nothing more. This limits the potential damage from accidents, errors, or security breaches. Implementation examples: IAM users get only the specific API actions they need; application service accounts access only their own databases; CI/CD pipelines have deployment permissions only for their target environments; containers run as non-root users; network security groups allow only required ports and source IPs. Benefits include: reduced attack surface, limited blast radius of compromised accounts, easier compliance auditing, and prevention of accidental damage. Regular access reviews and just-in-time access provisioning help maintain least privilege over time."
+  },
+  {
+    "id": "devops_039",
+    "section": "Security",
+    "question": "What are common DevOps security practices (DevSecOps)?",
+    "completion": "DevSecOps integrates security into every phase of the DevOps lifecycle rather than treating it as an afterthought. Key practices: shift security left by adding static application security testing (SAST) and dependency scanning in CI pipelines; use dynamic application security testing (DAST) in staging environments; scan container images for vulnerabilities before deployment (Trivy, Snyk); implement secrets management (HashiCorp Vault, AWS Secrets Manager) instead of hardcoding credentials; enforce infrastructure security policies as code (OPA, Sentinel); use network policies in Kubernetes to restrict pod-to-pod communication; implement mutual TLS (mTLS) for service-to-service authentication; run containers as non-root users; enable audit logging across all systems; perform regular penetration testing; and maintain an incident response plan."
+  },
+  {
+    "id": "devops_040",
+    "section": "DevOps",
+    "question": "What is caching and why is it important?",
+    "completion": "Caching stores frequently accessed data in a faster storage layer to reduce latency and load on backend systems. It works by intercepting requests and serving stored results instead of recomputing or fetching from the original source. Caching is important because it dramatically improves response times, reduces database load, lowers infrastructure costs, and improves application scalability. Types of caching: browser cache (static assets), CDN cache (edge servers closer to users), application cache (in-memory stores like Redis/Memcached), database query cache, and CPU cache. Cache strategies include: write-through (write to cache and DB simultaneously), write-back (write to cache first, async to DB), write-around (write to DB only, cache on read), cache-aside (application manages cache reads/writes). Key challenges are cache invalidation (knowing when cached data is stale) and cache stampede (many simultaneous cache misses)."
+  },
+  {
+    "id": "devops_041",
+    "section": "DevOps",
+    "question": "Explain stateless vs stateful applications",
+    "completion": "Stateless applications do not store any session data or state on the server between requests. Each request contains all the information needed to process it. This makes stateless applications ideal for horizontal scaling because any instance can handle any request — load balancers can distribute traffic freely. Examples: REST APIs, web frontends, microservices that delegate state to external stores. Stateful applications maintain state between requests, typically storing data on local disk or in memory. They require sticky sessions or careful state management for scaling. Examples: databases (MySQL, PostgreSQL), message brokers (Kafka), session stores. In modern architecture, the pattern is to build stateless application tiers that delegate state to purpose-built stateful services (Redis for sessions, RDS for data, S3 for files), enabling the application layer to scale independently."
+  },
+  {
+    "id": "devops_042",
+    "section": "DevOps",
+    "question": "What is a post-mortem meeting and why is it important?",
+    "completion": "A post-mortem (also called retrospective or incident review) is a structured meeting held after a significant incident to understand what happened, why it happened, and how to prevent recurrence. It is important because it turns incidents into learning opportunities, improves system reliability over time, and builds organizational resilience. A blameless post-mortem culture is essential — focus on systems and processes, not individuals. Structure typically includes: incident timeline with key events, root cause analysis (using techniques like 5 Whys or fishbone diagrams), what went well and what did not, impact assessment (duration, affected users, revenue impact), and concrete action items with owners and deadlines. The written post-mortem document should be shared broadly to spread learnings. Companies like Google SRE and Netflix consider post-mortems a core practice for maintaining reliability."
+  },
+  {
+    "id": "devops_043",
+    "section": "DevOps",
+    "question": "What are MTTF, MTTR, MTBF, and MTTA?",
+    "completion": "These are key reliability metrics: MTTF (Mean Time to Failure) measures the average time a non-repairable system operates before failure — used for hardware components. MTTR (Mean Time to Recovery/Repair) measures the average time to restore service after a failure, including detection, diagnosis, and fix time. Lower MTTR means faster incident response. MTBF (Mean Time Between Failures) measures the average time between failures for repairable systems: MTBF = MTTF + MTTR. MTTA (Mean Time to Acknowledge) measures how long it takes to start working on an incident after an alert fires. These metrics help evaluate system reliability and team operational effectiveness. To improve them: automate detection (reduce MTTA), implement runbooks and on-call procedures (reduce MTTR), invest in reliability engineering (increase MTTF/MTBF), and regularly review incident data to identify patterns."
+  },
+  {
+    "id": "devops_044",
+    "section": "Ansible",
+    "question": "What is Ansible and how does it work?",
+    "completion": "Ansible is an open-source automation tool for configuration management, application deployment, and orchestration. It is agentless — it connects to target machines over SSH (Linux) or WinRM (Windows) and pushes configuration changes, requiring no software installed on managed nodes. Key concepts: Inventory defines target hosts and groups; Playbooks are YAML files describing desired state through ordered tasks; Modules are units of work (apt, yum, copy, template, service); Roles organize playbooks into reusable components with tasks, handlers, templates, and variables; Facts are system information gathered from managed nodes. Ansible follows a push-based, idempotent model — running the same playbook multiple times produces the same result. It uses Jinja2 templating for dynamic configuration files and supports variables, conditionals, loops, and handlers for event-driven actions."
+  },
+  {
+    "id": "devops_045",
+    "section": "Ansible",
+    "question": "What is the difference between Ansible and Terraform?",
+    "completion": "Ansible and Terraform serve different primary purposes and complement each other. Terraform is a declarative infrastructure provisioning tool — you define the desired end state of infrastructure (VMs, networks, databases) and Terraform figures out how to achieve it. It maintains state and excels at lifecycle management (create, update, destroy). It follows the immutable infrastructure paradigm. Ansible is primarily a configuration management and application deployment tool — it excels at configuring software on existing servers, deploying applications, and orchestrating multi-step processes. It is procedural (task-by-task execution) and agentless. In practice, teams often use both together: Terraform provisions infrastructure (create EC2 instances, VPCs, RDS), then Ansible configures the software on that infrastructure (install packages, deploy applications, configure services)."
+  },
+  {
+    "id": "devops_046",
+    "section": "Python",
+    "question": "What is the difference between a list and a tuple in Python?",
+    "completion": "Lists and tuples are both ordered sequences in Python, but they differ in mutability and usage. Lists are mutable — you can add, remove, and modify elements after creation using methods like append(), insert(), remove(), and pop(). Lists use square brackets [1, 2, 3]. Tuples are immutable — once created, their elements cannot be changed, added, or removed. Tuples use parentheses (1, 2, 3). Because of immutability, tuples are: hashable (can be dictionary keys and set members), slightly faster in iteration, use less memory, and signal intent that the data should not be modified. Use lists for collections that change (shopping carts, task queues). Use tuples for fixed collections (coordinates, database rows, function return values). Named tuples from the collections module add field names for readability."
+  },
+  {
+    "id": "devops_047",
+    "section": "Python",
+    "question": "Explain Python decorators",
+    "completion": "Decorators are a Python pattern that allows you to modify or extend the behavior of functions or classes without changing their source code. A decorator is a function that takes another function as an argument, adds some functionality, and returns a modified function. Syntax uses the @decorator_name notation above the function definition. Common use cases: logging (log function calls and arguments), timing (measure execution time), authentication (check user permissions before executing), caching (memoize expensive function results), rate limiting, and input validation. Python's built-in decorators include @staticmethod, @classmethod, @property, and @functools.wraps (preserves the original function metadata). Decorators can be stacked (multiple decorators on one function), parameterized (decorators that accept arguments), and applied to classes. They are widely used in web frameworks like Flask (@app.route) and Django."
+  },
+  {
+    "id": "devops_048",
+    "section": "Shell",
+    "question": "How do you find all files larger than 100MB and older than 30 days?",
+    "completion": "Use the find command: find /path -type f -size +100M -mtime +30. This searches for regular files (-type f) larger than 100 megabytes (-size +100M) that were last modified more than 30 days ago (-mtime +30). To also list their sizes: find /path -type f -size +100M -mtime +30 -exec ls -lh {} \\;. To delete them: find /path -type f -size +100M -mtime +30 -delete (use with caution). Other useful find options: -name for filename patterns, -user for ownership, -perm for permissions, -maxdepth to limit directory depth, and -newer to compare against a reference file. For better performance on large filesystems, consider using -prune to skip certain directories or pipe to xargs for batch processing: find /path -type f -size +100M -mtime +30 -print0 | xargs -0 ls -lh."
+  },
+  {
+    "id": "devops_049",
+    "section": "DevOps",
+    "question": "What software delivery methods are you familiar with?",
+    "completion": "Three main software delivery methods: 1) Archive (tar, zip) — collect application files into a single archive for distribution. Simple but lacks dependency management, installation consistency, and upgrade/rollback mechanisms. 2) OS Packages (RPM, DEB, APK) — use the operating system package format for delivery. Provides standard install, upgrade, uninstall commands, dependency resolution, and integration with system package managers. Good for traditional server deployments. 3) Images (VM images, container images) — package the application with all its runtime dependencies into an immutable image. VM images (AMI, VMDK) include the full OS; container images (Docker) share the host kernel. Images provide the best environment consistency and are ideal for cloud-native and large-scale deployments. Modern teams typically use container images stored in registries, deployed through orchestration platforms like Kubernetes."
+  },
+  {
+    "id": "devops_050",
+    "section": "DevOps",
+    "question": "How do you plan capacity for CI/CD resources?",
+    "completion": "CI/CD capacity planning involves: 1) Measure current usage — track build queue times, agent utilization, build duration trends, and peak usage periods. 2) Identify bottlenecks — are builds queued because of insufficient agents, slow tests, or limited storage? 3) Project growth — estimate future build volume based on team growth, branching strategy, and release frequency. 4) Right-size resources — use appropriately sized build agents (CPU/memory matched to build requirements), separate heavy builds (compilation, Docker builds) from light tasks (linting, unit tests). 5) Use auto-scaling — cloud-based agents (Jenkins EC2 plugin, GitHub Actions, GitLab runners on Kubernetes) that scale up during peak hours and down at night. 6) Optimize pipelines — parallelize independent stages, cache dependencies, use incremental builds, and remove redundant steps. 7) Monitor and iterate — track queue wait time, build success rate, and resource utilization to continuously adjust capacity."
+  }
+]
