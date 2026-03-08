@@ -11,7 +11,10 @@ from .img_parser import ImgParser
 from ..embedding.base_emb import BaseEmbedding
 
 import nltk
-nltk.download("punkt")
+try:
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download("punkt", quiet=True)
 
 DATA_TYPES = ["text", "image"]
 TEXT_TYPES = ["pdf", "txt", "md"]

@@ -1,14 +1,16 @@
-"""Interview RAG — Build and query a RAG database from DevOps interview Q&A.
+"""Interview RAG — Build and query a RAG database from interview Q&A.
+
+Covers: GenAI, RAG, LLM, distributed training, ML, system design, DevOps.
 
 Usage:
     # Build the interview vector database
-    python script/interview_rag.py -t build -c config/interview_config.json
+    python script/interview_rag.py -t build -c config/interview_config.json -p data/interview_questions/interview_qa.json
 
     # Search interactively
     python script/interview_rag.py -t search -c config/interview_config.json
 
     # Single query
-    python script/interview_rag.py -t query -c config/interview_config.json -q "What is Kubernetes?"
+    python script/interview_rag.py -t query -c config/interview_config.json -q "What is RAG?"
 """
 
 import sys
@@ -23,23 +25,34 @@ from tinyrag import RAGConfig, TinyRAG
 from tinyrag.utils import read_json_to_list
 
 
-INTERVIEW_DATA_PATH = "data/interview_questions/devops_interview_en.json"
+INTERVIEW_DATA_PATH = "data/interview_questions/interview_qa.json"
 
 
-def load_interview_data(data_path: str) -> list[str]:
-    """Load interview Q&A data and format each record as a searchable text block."""
+def load_interview_data(data_path: str) -> list:
+    """Load interview Q&A data and format each record as a searchable text block.
+
+    Supports two JSON formats:
+    1. Simple: [{"completion": "Q: ...\nA: ..."}, ...]
+    2. Structured: [{"section": "...", "question": "...", "completion": "..."}, ...]
+    """
     raw_data = read_json_to_list(data_path)
     text_list = []
     for item in raw_data:
-        # Combine question + answer into a single retrievable document
-        section = item.get("section", "General")
-        question = item.get("question", "")
-        answer = item.get("completion", "")
-        text_block = (
-            f"[{section}] Q: {question}\n"
-            f"A: {answer}"
-        )
-        text_list.append(text_block)
+        if "question" in item:
+            # Structured format with section/question/completion fields
+            section = item.get("section", "General")
+            question = item.get("question", "")
+            answer = item.get("completion", "")
+            text_block = (
+                f"[{section}] Q: {question}\n"
+                f"A: {answer}"
+            )
+            text_list.append(text_block)
+        elif "completion" in item:
+            # Simple format: completion contains the full Q&A text
+            text_list.append(item["completion"])
+        else:
+            logger.warning(f"Skipping unrecognized record format: {list(item.keys())}")
     logger.info(f"Loaded {len(text_list)} interview Q&A records from {data_path}")
     return text_list
 
@@ -120,7 +133,7 @@ def single_query(config_path: str, query: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Interview RAG — DevOps Q&A retrieval")
+    parser = argparse.ArgumentParser(description="Interview RAG — Technical Q&A retrieval")
     parser.add_argument("-c", "--config", type=str, default="config/interview_config.json",
                         help="RAG config file path")
     parser.add_argument("-t", "--type", type=str, default="search",

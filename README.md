@@ -305,25 +305,34 @@ def search(self, query:str, top_n=3) -> list:
 
 ## 5. Interview Q&A RAG (English)
 
-This project includes a **DevOps Interview Q&A RAG** module that indexes 50 production-quality interview questions and answers covering DevOps, CI/CD, Jenkins, Docker, Kubernetes, Terraform, Linux, Git, Networking, AWS, Monitoring, Security, Ansible, Python, and Shell.
+This project includes a comprehensive **Interview Q&A RAG** module that indexes technical interview questions and answers across multiple domains:
 
-### 5.1 Dataset
+- **GenAI / LLM**: tokenization, decoding strategies, prompt engineering, hallucination, RLHF, MoE
+- **RAG**: chunking, embeddings, vector databases, reranking, evaluation, production pipelines
+- **ML Fundamentals**: supervised/unsupervised/self-supervised learning, bias-variance, gradient descent, metrics
+- **Distributed Training**: data/tensor/pipeline parallelism, FSDP/ZeRO
+- **System Design**: recommendation systems, feature stores, batch vs real-time inference
+- **MLOps / DevOps**: Docker, Kubernetes, CI/CD, model deployment, monitoring, data drift
+- **Model Optimization**: quantization, LoRA, model compression, transfer learning
 
-The interview dataset is at `data/interview_questions/devops_interview_en.json`. Each record has:
+### 5.1 Datasets
 
+Two dataset formats are supported:
+
+**Simple format** (`data/interview_questions/interview_qa.json`) — 45+ Q&A pairs:
 ```json
-{
-    "id": "devops_001",
-    "section": "DevOps",
-    "question": "What is DevOps?",
-    "completion": "DevOps is a set of cultural philosophies, practices, and tools..."
-}
+{"completion": "Q: What is RAG?\nA: RAG is a design pattern that grounds LLM answers in facts..."}
+```
+
+**Structured format** (e.g. `data/interview_questions/devops_interview_en.json`):
+```json
+{"id": "devops_001", "section": "DevOps", "question": "What is DevOps?", "completion": "..."}
 ```
 
 ### 5.2 Build the Interview Database
 
 ```bash
-python script/interview_rag.py -t build -c config/interview_config.json
+python script/interview_rag.py -t build -c config/interview_config.json -p data/interview_questions/interview_qa.json
 ```
 
 ### 5.3 Interactive Search
@@ -335,12 +344,12 @@ python script/interview_rag.py -t search -c config/interview_config.json
 ### 5.4 Single Query
 
 ```bash
-python script/interview_rag.py -t query -c config/interview_config.json -q "What is Kubernetes?"
+python script/interview_rag.py -t query -c config/interview_config.json -q "What is RAG and how does it work?"
 ```
 
 ### 5.5 Add Your Own Questions
 
-Append new Q&A entries to `data/interview_questions/devops_interview_en.json` following the same schema, then rebuild the database.
+Append new Q&A entries to the JSON data file using either format above, then rebuild the database.
 
 ## 6.参考
 

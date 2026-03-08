@@ -1,4 +1,5 @@
 models
-data
+data/*
+!data/interview_questions/
 *.pyc
 __pycache__
